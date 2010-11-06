@@ -1,0 +1,13 @@
+desc "Create index.html and css/main.css"
+task :compile do
+  `haml src/index.haml > index.html`
+  `sass src/main.sass > css/main.css`
+end
+
+desc "Remove index.html and css/main.css"
+task :cleanup do
+  `rm index.html`
+  `rm css/main.css`
+end
+
+task :default => :compile
