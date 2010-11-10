@@ -1,13 +1,18 @@
 desc "Create index.html and css/main.css"
 task :compile do
-  `haml src/index.haml > index.html`
-  `sass src/main.sass > css/main.css`
+  `haml src/index.haml > public/index.html`
+  `sass src/main.sass > public/css/main.css`
 end
 
 desc "Remove index.html and css/main.css"
 task :cleanup do
-  `rm index.html`
-  `rm css/main.css`
+  `rm public/index.html`
+  `rm public/css/main.css`
+end
+
+desc "Deploy website"
+task :deploy => :compile do
+  system "rsync --del -avz public/* dreamhost:rubysur.org/public/"
 end
 
 task :default => :compile
